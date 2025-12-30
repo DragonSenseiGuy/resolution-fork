@@ -65,18 +65,19 @@
 			<img src={fireworksGif} alt="" />
 		</div>
 
-		<div class="hero-content">
-			<p class="hero-description">{heroDescription}</p>
+<!--		<div class="hero-content">-->
+<!--			<p class="hero-description">{heroDescription}</p>-->
 
-			<a href={ctaHref} class="cta-button">
-				<span>{ctaText}</span>
-			</a>
-		</div>
-
-		<div class="sparkly-border">
-			<img src={sparklyBorder} alt="" />
-		</div>
+<!--			<a href={ctaHref} class="cta-button">-->
+<!--				<span>{ctaText}</span>-->
+<!--			</a>-->
+<!--		</div>-->
 	</section>
+
+	<!-- Sparkly Border Divider -->
+	<div class="sparkly-border">
+		<img src={sparklyBorder} alt="" />
+	</div>
 
 	<!-- Steps Section -->
 	<section class="steps-section">
@@ -257,18 +258,19 @@
 	}
 
 	.sparkly-border {
-		position: absolute;
-		bottom: 0;
-		left: 0;
+		position: relative;
 		width: 100%;
-		z-index: 4;
+		z-index: 15;
 		pointer-events: none;
+		transform: translateY(-115%);
+		margin-bottom: -15%;
 	}
 
 	.sparkly-border img {
 		width: 100%;
 		height: auto;
 		display: block;
+		object-fit: cover;
 	}
 
 	/* ========== STEPS SECTION ========== */
@@ -276,6 +278,7 @@
 		position: relative;
 		width: 100%;
 		background: #0a0e17;
+		margin-top: -10%;
 	}
 
 	.section-bg {
