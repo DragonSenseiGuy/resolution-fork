@@ -104,10 +104,11 @@
 		</div>
 	</section>
 
-	<!-- Stories from Past Events Section -->
-	<section class="events-section">
+	<!-- Events & FAQ Section (combined on same light blue background) -->
+	<section class="events-faq-section">
 		<img src={lightBlueBg} alt="" class="section-bg" />
 		
+		<!-- Stories from Past Events -->
 		<h2 class="events-title">Stories from Past Events</h2>
 
 		<div class="events-grid">
@@ -133,12 +134,8 @@
 				</div>
 			</div>
 		</div>
-	</section>
 
-	<!-- FAQ Section -->
-	<section class="faq-section">
-		<img src={lightBlueBg} alt="" class="section-bg" />
-		
+		<!-- FAQ -->
 		<div class="running-decoration">
 			<img src={running} alt="" />
 		</div>
@@ -362,14 +359,14 @@
 		height: auto;
 	}
 
-	/* ========== EVENTS SECTION ========== */
-	.events-section {
+	/* ========== EVENTS & FAQ SECTION ========== */
+	.events-faq-section {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
 	}
 
-	.events-section .section-bg {
+	.events-faq-section .section-bg {
 		position: relative;
 	}
 
@@ -454,21 +451,11 @@
 		line-height: 1.4;
 	}
 
-	/* ========== FAQ SECTION ========== */
-	.faq-section {
-		position: relative;
-		width: 100%;
-		overflow: hidden;
-	}
-
-	.faq-section .section-bg {
-		position: relative;
-	}
-
+	/* ========== FAQ ELEMENTS (within combined section) ========== */
 	.running-decoration {
 		position: absolute;
 		left: -5%;
-		bottom: 10%;
+		bottom: 5%;
 		width: 25%;
 		max-width: 350px;
 		z-index: 1;
@@ -483,7 +470,7 @@
 
 	.faq-title {
 		position: absolute;
-		top: 5%;
+		bottom: 35%;
 		left: 50%;
 		transform: translateX(-50%);
 		font-family: 'Kodchasan', sans-serif;
@@ -496,7 +483,7 @@
 
 	.faq-wrapper {
 		position: absolute;
-		top: 25%;
+		bottom: 5%;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 90%;
