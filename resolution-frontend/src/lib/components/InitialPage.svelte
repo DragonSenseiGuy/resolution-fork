@@ -31,7 +31,7 @@
 	}
 
 	let {
-		heroDescription = "Ship every week. Earn prizes. When others quit, their share becomes yours.",
+		heroDescription = "Ship every week. Earn prizes. Most people quit. Will you be different?",
 		ctaText = "STAKE YOUR CLAIM",
 		ctaHref = "/onboarding",
 		steps = [
