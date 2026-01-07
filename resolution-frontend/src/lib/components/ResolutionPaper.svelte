@@ -1,7 +1,14 @@
 <script lang="ts">
 	import DOMPurify from "dompurify";
+	import type { Snippet } from 'svelte';
 
-	let { visible = false, children, text = "" } = $props();
+	interface Props {
+		visible?: boolean;
+		children?: Snippet;
+		text?: string;
+	}
+
+	let { visible = false, children, text = "" }: Props = $props();
 
 	let submitted = $state(false);
 	let error = $state("");
@@ -194,9 +201,7 @@
 		color: #aaa;
 	}
 
-	.email-input.error {
-		color: #c44;
-	}
+
 
 	.submit-btn {
 		font-family: "Patrick Hand", cursive;
@@ -259,9 +264,7 @@
 			top: 38%;
 			left: 50%;
 		}
-		.paper-title {
-			font-size: 2.5rem;
-		}
+
 
 		.paper-subtitle {
 			font-size: 1.1rem;

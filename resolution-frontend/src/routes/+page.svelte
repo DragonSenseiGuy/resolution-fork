@@ -2,6 +2,10 @@
 	import InitialPage from '$lib/components/InitialPage.svelte';
 </script>
 
+<svelte:head>
+	<title>Resolution - Ship Every Week, Earn Prizes</title>
+</svelte:head>
+
 <InitialPage
 	heroDescription="Ship every week. Earn prizes. Most people quit. Will you be different?"
 	ctaText="STAKE YOUR CLAIM"
