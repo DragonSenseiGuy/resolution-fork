@@ -1,0 +1,52 @@
+:root {
+	/* Typography */
+	--font-primary: 'Kodchasan', sans-serif;
+	--font-handwritten: 'Patrick Hand', cursive;
+
+	/* Brand Colors */
+	--color-gold: #ffe475;
+	--color-gold-dark: #a58d28;
+	--color-gold-light: #fff2b9;
+	--color-gold-muted: #fff0af;
+
+	/* CTA Colors */
+	--color-cta-bg: rgba(253, 205, 5, 0.36);
+	--color-cta-border: rgba(253, 205, 5, 0.69);
+	--color-cta-hover: rgba(253, 205, 5, 0.5);
+
+	/* Accent Colors */
+	--color-pink: #e472ab;
+	--color-blue: #91c8ff;
+	--color-blue-light: #a8d4f5;
+	--color-green: #4a7c59;
+
+	/* Neutral Colors */
+	--color-white: #ffffff;
+	--color-paper: #5a5247;
+	--color-paper-light: #7a7060;
+	--color-text-muted: #aaaaaa;
+	--color-error: #cc4444;
+
+	/* Shadows */
+	--shadow-glow-gold: 0 0 12.8px var(--color-gold);
+	--shadow-glow-cta: 0 0 13.6px 5px var(--color-gold);
+	--shadow-card: 0px 8px 4px rgba(0, 0, 0, 0.25);
+	--shadow-card-lg: 0px 8px 15.7px rgba(0, 0, 0, 0.25);
+	--shadow-input: 2px 2px 0 0 var(--color-paper);
+
+	/* Border Radius */
+	--radius-sm: 4px;
+	--radius-lg: 50px;
+	--radius-xl: 60px;
+
+	/* Transitions */
+	--transition-fast: 0.2s ease;
+	--transition-normal: 0.3s ease;
+	--transition-slow: 0.8s ease-out;
+
+	/* Z-index Scale */
+	--z-base: 0;
+	--z-raised: 1;
+	--z-overlay: 2;
+	--z-modal: 3;
+}
