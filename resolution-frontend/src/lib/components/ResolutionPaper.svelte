@@ -6,9 +6,10 @@
 		visible?: boolean;
 		children?: Snippet;
 		text?: string;
+		onSuccess?: () => void;
 	}
 
-	let { visible = false, children, text = "" }: Props = $props();
+	let { visible = false, children, text = "", onSuccess }: Props = $props();
 
 	let submitted = $state(false);
 	let error = $state("");
@@ -52,6 +53,7 @@
 
 			console.log("Email submitted:", cleanEmail);
 			submitted = true;
+			onSuccess?.();
 		} catch (err: any) {
 			console.error(err);
 			error = err.message || "Something went wrong. Please try again.";

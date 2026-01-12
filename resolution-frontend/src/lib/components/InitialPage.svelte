@@ -26,7 +26,7 @@
 	let {
 		heroDescription = "Ship every week. Earn prizes. Most people quit. Will you be different?",
 		ctaText = "STAKE YOUR CLAIM",
-		ctaHref = "/onboarding",
+		ctaHref = "/rsvp",
 		steps = [
 			{ title: "⭐ One Star", description: "~2hr/week • 8 weeks • $80 prize pool. Light commitment, real rewards." },
 			{ title: "⭐⭐ Two Star", description: "~5hr/week • 8 weeks • $200 prize pool. Serious growth, bigger prizes." },
