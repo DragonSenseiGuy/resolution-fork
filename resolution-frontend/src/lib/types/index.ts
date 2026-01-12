@@ -7,6 +7,7 @@ export interface Event {
 	title: string;
 	description: string;
 	rotation?: number;
+	image?: string;
 }
 
 export interface FAQ {

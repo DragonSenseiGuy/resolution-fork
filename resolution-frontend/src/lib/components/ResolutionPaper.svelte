@@ -120,7 +120,7 @@
 		transform: translateY(100%) translateZ(0);
 		will-change: transform;
 		backface-visibility: hidden;
-		transition: transform 0.8s ease-out;
+		transition: transform var(--transition-slow);
 	}
 
 	.resolution-paper.visible {
@@ -129,7 +129,6 @@
 
 	.paper-content {
 		position: absolute;
-		/* Area covering the blank space efficiently */
 		top: 38%;
 		left: 50%;
 		transform: translateX(-50%);
@@ -137,29 +136,26 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 1.5rem;
-		padding: 1rem;
-		/* Area of the notepad paper */
-		width: 35%;
-		height: 50%;
+		gap: 1.2rem;
+		padding: 0.8rem;
+		width: 28%;
+		height: 40%;
 		overflow-y: auto;
-		/* Optional: for debugging the border */
-		/* border: 2px dashed rgba(0,0,0,0.1); */
 	}
 
 	.paper-subtitle {
-		font-family: "Patrick Hand", cursive;
-		font-size: 1.5rem;
-		color: #5a5247;
+		font-family: var(--font-handwritten);
+		font-size: 1.2rem;
+		color: var(--color-paper);
 		margin: 0;
 		text-align: center;
 		font-weight: normal;
 	}
 
 	.paper-text {
-		font-family: "Patrick Hand", cursive;
-		font-size: 1.5rem;
-		color: #5a5247;
+		font-family: var(--font-handwritten);
+		font-size: 1.2rem;
+		color: var(--color-paper);
 		margin: 0;
 		text-align: center;
 		line-height: 1.4;
@@ -170,29 +166,29 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.8rem;
 	}
 
 	.input-wrapper {
 		display: flex;
-		background: white;
-		border: 2px solid #5a5247;
-		border-radius: 4px; /* More of a paper-like feel than pill-shaped */
+		background: var(--color-white);
+		border: 2px solid var(--color-paper);
+		border-radius: var(--radius-sm);
 		overflow: hidden;
-		box-shadow: 2px 2px 0 0 #5a5247;
+		box-shadow: var(--shadow-input);
 		width: 100%;
 	}
 
 	.input-wrapper:focus-within {
-		border-color: #e472ab;
-		box-shadow: 2px 2px 0 0 #e472ab;
+		border-color: var(--color-pink);
+		box-shadow: var(--shadow-input-focus);
 	}
 
 	.email-input {
 		flex: 1;
-		font-family: "Patrick Hand", cursive;
-		font-size: 1.25rem;
-		padding: 0.75rem 1.25rem;
+		font-family: var(--font-handwritten);
+		font-size: 1rem;
+		padding: 0.6rem 1rem;
 		border: none;
 		background: transparent;
 		color: #333;
@@ -200,21 +196,19 @@
 	}
 
 	.email-input::placeholder {
-		color: #aaa;
+		color: var(--color-text-muted);
 	}
 
-
-
 	.submit-btn {
-		font-family: "Patrick Hand", cursive;
-		font-size: 1.5rem;
-		padding: 0.75rem 1.5rem;
-		background: #ffe475;
+		font-family: var(--font-handwritten);
+		font-size: 1.2rem;
+		padding: 0.6rem 1.2rem;
+		background: var(--color-gold);
 		border: none;
-		border-left: 2px solid #5a5247;
-		color: #5a5247;
+		border-left: 2px solid var(--color-paper);
+		color: var(--color-paper);
 		cursor: pointer;
-		transition: background 0.2s;
+		transition: background var(--transition-fast);
 	}
 
 	.submit-btn:hover:not(:disabled) {
@@ -231,9 +225,9 @@
 	}
 
 	.error-text {
-		font-family: "Patrick Hand", cursive;
-		font-size: 1rem;
-		color: #c44;
+		font-family: var(--font-handwritten);
+		font-size: 0.8rem;
+		color: var(--color-error);
 		margin: 0;
 		text-align: center;
 	}
@@ -242,44 +236,43 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0.4rem;
 	}
 
 	.success-text {
-		font-family: "Patrick Hand", cursive;
-		font-size: 2.5rem;
-		color: #4a7c59;
+		font-family: var(--font-handwritten);
+		font-size: 2rem;
+		color: var(--color-green);
 		margin: 0;
 	}
 
 	.success-subtext {
-		font-family: "Patrick Hand", cursive;
-		font-size: 1.2rem;
-		color: #7a7060;
+		font-family: var(--font-handwritten);
+		font-size: 1rem;
+		color: var(--color-paper-light);
 		margin: 0;
 	}
 
 	@media (max-width: 480px) {
 		.paper-content {
-			width: 65%;
-			height: 50%;
+			width: 52%;
+			height: 40%;
 			top: 38%;
 			left: 50%;
 		}
 
-
 		.paper-subtitle {
-			font-size: 1.1rem;
+			font-size: 0.9rem;
 		}
 
 		.email-input {
-			font-size: 1rem;
-			padding: 0.6rem 1rem;
+			font-size: 0.8rem;
+			padding: 0.5rem 0.8rem;
 		}
 
 		.submit-btn {
-			font-size: 1.25rem;
-			padding: 0.6rem 1.25rem;
+			font-size: 1rem;
+			padding: 0.5rem 1rem;
 		}
 	}
 </style>

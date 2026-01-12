@@ -28,6 +28,7 @@
 
 	const noteImage = $derived(noteImages[variant]);
 	const rotationStyle = $derived(rotation !== 0 ? `transform: rotate(${rotation}deg)` : '');
+	const counterRotationStyle = $derived(rotation !== 0 ? `transform: rotate(${-rotation}deg)` : '');
 </script>
 
 <div class="event-card" class:has-rotation={rotation !== 0}>
@@ -51,12 +52,11 @@
 	.event-card {
 		position: relative;
 		width: 100%;
-		max-width: 400px;
-		filter: drop-shadow(var(--shadow-card, 0px 8px 4px rgba(0, 0, 0, 0.25)));
+		filter: drop-shadow(var(--shadow-card));
 	}
 
 	.event-card.has-rotation {
-		filter: drop-shadow(var(--shadow-card-lg, 0px 8px 15.7px rgba(0, 0, 0, 0.25)));
+		filter: drop-shadow(var(--shadow-card-lg));
 	}
 
 	.card-inner {
@@ -79,19 +79,19 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-start;
-		padding: 15% 10%;
+		padding: 8% 5%;
 		box-sizing: border-box;
 	}
 
 	.event-content.with-description {
-		padding: 8% 10%;
+		padding: 5% 5%;
 	}
 
 	.event-title {
-		font-family: var(--font-primary, 'Kodchasan', sans-serif);
+		font-family: var(--font-primary);
 		font-weight: 400;
-		color: var(--color-gold-dark, #a58d28);
-		font-size: clamp(1.5rem, 4vw, 3rem);
+		color: var(--color-gold-dark);
+		font-size: clamp(1.2rem, 3.2vw, 2.4rem);
 		text-align: center;
 		margin: 0 0 5% 0;
 	}
@@ -106,13 +106,14 @@
 		height: auto;
 		display: block;
 		object-fit: cover;
+		border-radius: 8px;
 	}
 
 	.event-description {
-		font-family: var(--font-primary, 'Kodchasan', sans-serif);
+		font-family: var(--font-primary);
 		font-weight: 400;
-		color: var(--color-gold-dark, #a58d28);
-		font-size: clamp(0.8rem, 2vw, 1.2rem);
+		color: var(--color-gold-dark);
+		font-size: clamp(0.64rem, 1.6vw, 1rem);
 		text-align: center;
 		margin: 0;
 		line-height: 1.4;

@@ -13,6 +13,7 @@
 	--color-cta-bg: rgba(253, 205, 5, 0.36);
 	--color-cta-border: rgba(253, 205, 5, 0.69);
 	--color-cta-hover: rgba(253, 205, 5, 0.5);
+	--color-cta-text: #fff0af;
 
 	/* Accent Colors */
 	--color-pink: #e472ab;
@@ -27,17 +28,23 @@
 	--color-text-muted: #aaaaaa;
 	--color-error: #cc4444;
 
+	/* Background Colors */
+	--color-bg-dark: #050417;
+
 	/* Shadows */
 	--shadow-glow-gold: 0 0 12.8px var(--color-gold);
 	--shadow-glow-cta: 0 0 13.6px 5px var(--color-gold);
 	--shadow-card: 0px 8px 4px rgba(0, 0, 0, 0.25);
 	--shadow-card-lg: 0px 8px 15.7px rgba(0, 0, 0, 0.25);
 	--shadow-input: 2px 2px 0 0 var(--color-paper);
+	--shadow-input-focus: 2px 2px 0 0 var(--color-pink);
 
 	/* Border Radius */
 	--radius-sm: 4px;
 	--radius-lg: 50px;
 	--radius-xl: 60px;
+	--radius-pill: 7.8rem;
+	--radius-button: 50px;
 
 	/* Transitions */
 	--transition-fast: 0.2s ease;
