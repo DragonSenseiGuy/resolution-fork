@@ -14,6 +14,7 @@ model User {
   email       String   @unique
   hackClubId  String   @unique
   resolutions Resolution[]
+  sessions    Session[]
   createdAt   DateTime @default(now())
 }
 
@@ -24,4 +25,11 @@ model Resolution {
   updatedAt DateTime @updatedAt
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+}
+
+model Session {
+  id        String   @id
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
 }
