@@ -1,14 +1,56 @@
-import { simpleOAuth2 } from 'simple-oauth2';
+import { Lucia } from 'lucia';
+import { PrismaAdapter } from '@lucia-auth/adapter-prisma';
+import { prisma } from './prisma';
+import { dev } from '$app/environment';
+import { AuthorizationCode } from 'simple-oauth2';
 import { env } from '$env/dynamic/private';
 
-export const hackClubAuth = new simpleOAuth2.AuthorizationCode({
-	client: {
-		id: env.HACK_CLUB_CLIENT_ID,
-		secret: env.HACK_CLUB_CLIENT_SECRET
-	},
-	auth: {
-		tokenHost: 'https://auth.hackclub.com',
-		tokenPath: '/api/v1/token',
-		authorizePath: '/auth'
-	}
+const adapter = new PrismaAdapter(prisma.session, prisma.user);
+
+export const lucia = new Lucia(adapter, {
+  sessionCookie: {
+    attributes: {
+      secure: !dev
+    }
+  },
+  getUserAttributes: (attributes) => {
+    return {
+      email: attributes.email,
+      hackClubId: attributes.hackClubId,
+      firstName: attributes.firstName,
+      lastName: attributes.lastName,
+      slackId: attributes.slackId,
+      verificationStatus: attributes.verificationStatus,
+      yswsEligible: attributes.yswsEligible
+    };
+  }
+});
+
+declare module 'lucia' {
+  interface Register {
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
+  }
+}
+
+interface DatabaseUserAttributes {
+  email: string;
+  hackClubId: string;
+  firstName: string | null;
+  lastName: string | null;
+  slackId: string | null;
+  verificationStatus: string | null;
+  yswsEligible: boolean;
+}
+
+export const hackClubAuth = new AuthorizationCode({
+  client: {
+    id: env.HACK_CLUB_CLIENT_ID!,
+    secret: env.HACK_CLUB_CLIENT_SECRET!
+  },
+  auth: {
+    tokenHost: 'https://auth.hackclub.com',
+    tokenPath: '/oauth/token',
+    authorizePath: '/oauth/authorize'
+  }
 });

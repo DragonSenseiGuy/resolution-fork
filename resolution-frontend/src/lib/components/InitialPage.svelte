@@ -66,9 +66,14 @@
 		<div class="hero-content">
 			<p class="hero-description">{heroDescription}</p>
 
-			<a href={ctaHref} class="cta-button">
-				<span>{ctaText}</span>
-			</a>
+			<div class="hero-buttons">
+				<a href={ctaHref} class="cta-button">
+					<span>{ctaText}</span>
+				</a>
+				<a href="/api/auth/login" class="cta-button">
+					<span>Login</span>
+				</a>
+			</div>
 		</div>
 	</section>
 
@@ -237,6 +242,11 @@
 		z-index: var(--z-overlay);
 		width: 90%;
 		max-width: 560px;
+	}
+
+	.hero-buttons {
+		display: flex;
+		gap: 1rem;
 	}
 
 	.hero-description {
