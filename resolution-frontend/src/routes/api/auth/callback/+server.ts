@@ -4,7 +4,7 @@ import { prisma } from '$lib/server/prisma';
 import { env } from '$env/dynamic/private';
 import { generateIdFromEntropySize } from 'lucia';
 
-export const GET = async ({ url, cookies }) => {
+export const GET = async ({ url, cookies, locals }) => {
   const code = url.searchParams.get('code');
   if (!code) {
     throw redirect(302, '/');
@@ -35,36 +35,30 @@ export const GET = async ({ url, cookies }) => {
       yswsEligible: hackClubUser.ysws_eligible || false
     };
 
-    let user = await prisma.user.findUnique({
-      where: {
-        hackClubId: hackClubUser.id
+    const user = await prisma.user.upsert({
+      where: { hackClubId: hackClubUser.id },
+      update: userData,
+      create: {
+        id: generateIdFromEntropySize(10),
+        hackClubId: hackClubUser.id,
+        ...userData
       }
     });
 
-    if (!user) {
-      user = await prisma.user.create({
-        data: {
-          id: generateIdFromEntropySize(10),
-          hackClubId: hackClubUser.id,
-          ...userData
-        }
-      });
+    let sessionCookie;
+    if (locals.session && locals.user?.id === user.id) {
+      sessionCookie = lucia.createSessionCookie(locals.session.id);
     } else {
-      user = await prisma.user.update({
-        where: { hackClubId: hackClubUser.id },
-        data: userData
-      });
+      const session = await lucia.createSession(user.id, {});
+      sessionCookie = lucia.createSessionCookie(session.id);
     }
-
-    const session = await lucia.createSession(user.id, {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
 
     cookies.set(sessionCookie.name, sessionCookie.value, {
       path: '.',
       ...sessionCookie.attributes
     });
 
-    throw redirect(302, '/app');
+    throw redirect(302, '/auth/complete');
   } catch (error) {
     if (error instanceof Response || (error as any)?.status === 302) {
       throw error;
