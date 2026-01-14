@@ -3,6 +3,7 @@ import { hackClubAuth, lucia } from '$lib/server/auth';
 import { prisma } from '$lib/server/prisma';
 import { env } from '$env/dynamic/private';
 import { generateIdFromEntropySize } from 'lucia';
+import { EnrollmentService } from '$lib/server/services';
 
 export const GET = async ({ url, cookies, locals }) => {
   const code = url.searchParams.get('code');
@@ -57,6 +58,15 @@ export const GET = async ({ url, cookies, locals }) => {
       path: '.',
       ...sessionCookie.attributes
     });
+
+    // Auto-enroll user in the active season as a participant
+    const activeSeason = await prisma.programSeason.findFirst({
+      where: { isActive: true }
+    });
+
+    if (activeSeason) {
+      await EnrollmentService.enrollParticipant(user.id, activeSeason.slug);
+    }
 
     throw redirect(302, '/auth/complete');
   } catch (error) {
