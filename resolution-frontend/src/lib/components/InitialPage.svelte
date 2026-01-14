@@ -49,6 +49,16 @@
 		showEvents = false,
 		showFaq = false
 	}: Props = $props();
+
+	let openFaqIndex = $state<number | null>(null);
+
+	function toggleFaq(index: number) {
+		if (openFaqIndex === index) {
+			openFaqIndex = null;
+		} else {
+			openFaqIndex = index;
+		}
+	}
 </script>
 
 <div class="initial-page">
@@ -125,7 +135,7 @@
 						<svg viewBox="-50 0 700 150" class="curved-text">
 							<path id="curve" d="M 0,100 Q 300,140 600,0" fill="transparent"/>
 							<text>
-								<textPath href="#curve" startOffset="50%" text-anchor="middle">Stories from Past Events</textPath>
+								<textPath href="#curve" startOffset="50%" text-anchor="middle">Pick Your Path</textPath>
 							</text>
 						</svg>
 					</h2>
@@ -138,6 +148,7 @@
 								imageSrc={events[0]?.image}
 								variant="yellow"
 								rotation={0}
+								starCount={events[0]?.starCount}
 							/>
 						</div>
 
@@ -148,6 +159,7 @@
 								imageSrc={events[1]?.image}
 								variant="pink"
 								rotation={events[1]?.rotation ?? 12}
+								starCount={events[1]?.starCount}
 							/>
 						</div>
 
@@ -158,6 +170,7 @@
 								imageSrc={events[2]?.image}
 								variant="blue"
 								rotation={events[2]?.rotation ?? -21}
+								starCount={events[2]?.starCount}
 							/>
 						</div>
 					</div>
@@ -175,9 +188,21 @@
 					<div class="faq-content">
 						<div class="faq-list">
 							{#each faqs as faq, i}
-								<div class="faq-item">
-									<span class="faq-question">{faq.question}</span>
-								</div>
+								<button 
+									class="faq-item" 
+									class:is-open={openFaqIndex === i}
+									onclick={() => toggleFaq(i)}
+								>
+									<div class="faq-header">
+										<span class="faq-question">{faq.question}</span>
+										<span class="faq-chevron">{openFaqIndex === i ? '▲' : '▼'}</span>
+									</div>
+									{#if openFaqIndex === i && faq.answer}
+										<div class="faq-answer">
+											<p>{faq.answer}</p>
+										</div>
+									{/if}
+								</button>
 								{#if i < faqs.length - 1}
 									<img src={vectorLine} alt="" class="faq-divider" />
 								{/if}
@@ -253,22 +278,25 @@
 		font-family: var(--font-primary);
 		font-weight: 400;
 		color: var(--color-gold);
-		font-size: clamp(0.8rem, 1.2vw, 2rem);
+		font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
 		text-align: center;
 		text-shadow: var(--shadow-glow-gold);
-		line-height: 1.6;
+		line-height: 1.5;
 		margin: 0;
 	}
 
 	.cta-button {
 		background: var(--color-cta-bg);
-		border: 5px solid var(--color-cta-border);
+		border: 3px solid var(--color-cta-border);
 		border-radius: var(--radius-button);
-		padding: 0.8rem 2.4rem;
+		padding: 0.75rem 1.75rem;
 		text-decoration: none;
 		transition: all var(--transition-normal);
 		cursor: pointer;
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
 	}
 
 	.cta-button:hover {
@@ -278,8 +306,8 @@
 
 	.cta-button span {
 		color: var(--color-cta-text);
-		font-size: clamp(1.2rem, 2.4vw, 4rem);
-		font-weight: 400;
+		font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
+		font-weight: 500;
 		white-space: nowrap;
 	}
 
@@ -338,7 +366,7 @@
 
 	.step {
 		position: absolute;
-		max-width: 22%;
+		max-width: 30%;
 	}
 
 	.step-1 {
@@ -362,10 +390,10 @@
 	.step-text {
 		font-family: var(--font-primary);
 		color: var(--color-gold-light);
-		font-size: clamp(0.8rem, 2vw, 4rem);
+		font-size: clamp(1.1rem, 1rem + 1vw, 2.25rem);
 		text-align: center;
 		text-shadow: var(--shadow-glow-gold);
-		line-height: 1.4;
+		line-height: 1.35;
 		margin: 0;
 	}
 
@@ -418,7 +446,7 @@
 		font-weight: 400;
 		font-style: italic;
 		fill: var(--color-white);
-		font-size: clamp(19px, 3.2vw, 38px);
+		font-size: clamp(18px, 2.2vw, 32px);
 	}
 
 	.events-grid {
@@ -464,22 +492,22 @@
 	}
 
 	.running-decoration {
-		left: 3%;
-		top: 0;
-		width: 30%;
+		left: 0;
+		top: 5%;
+		width: 28%;
 		z-index: var(--z-raised);
 		transform: rotate(162deg) scaleY(-1);
 	}
 
 	.faq-title {
 		position: absolute;
-		top: 16%;
+		top: 8%;
 		left: 50%;
 		transform: translateX(-50%);
 		font-family: var(--font-primary);
 		font-weight: 700;
 		color: var(--color-white);
-		font-size: clamp(3.2rem, 9.6vw, 15rem);
+		font-size: clamp(3rem, 8vw, 12rem);
 		text-align: center;
 		margin: 0;
 		z-index: var(--z-overlay);
@@ -487,47 +515,113 @@
 
 	.faq-content {
 		position: absolute;
-		top: 40%;
-		left: 21%;
-		width: 79%;
-		height: 60%;
+		top: 32%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 90%;
+		max-width: 900px;
 		display: flex;
 		align-items: flex-start;
+		justify-content: center;
 		z-index: var(--z-overlay);
 	}
 
 	.faq-list {
 		background: var(--color-white);
-		border-radius: var(--radius-pill);
-		padding: 2.4rem 3.2rem;
-		width: 46%;
-		margin-top: -10%;
-		margin-left: 14%;
+		border-radius: clamp(2rem, 5vw, 7.8rem);
+		padding: clamp(1.5rem, 3vw, 3rem) clamp(2rem, 4vw, 4rem);
+		width: 100%;
+		max-width: 700px;
 	}
 
 	.faq-item {
-		padding: 1rem 0;
+		width: 100%;
+		padding: clamp(0.75rem, 1.5vw, 1.25rem) 0;
 		text-align: center;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		font-family: inherit;
+		transition: all 0.2s ease;
+	}
+
+	.faq-item:hover {
+		background: rgba(145, 200, 255, 0.08);
+		border-radius: 1rem;
+	}
+
+	.faq-item.is-open {
+		background: rgba(145, 200, 255, 0.12);
+		border-radius: 1rem;
+		padding: clamp(0.75rem, 1.5vw, 1.25rem);
+	}
+
+	.faq-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.faq-chevron {
+		font-size: clamp(0.75rem, 1vw, 1rem);
+		color: var(--color-blue);
+		opacity: 0.6;
+		transition: transform 0.2s ease;
+	}
+
+	.faq-item.is-open .faq-chevron {
+		opacity: 1;
+	}
+
+	.faq-answer {
+		margin-top: 1rem;
+		padding: 0 1rem;
+		animation: slideDown 0.3s ease;
+	}
+
+	.faq-answer p {
+		font-family: var(--font-primary);
+		font-weight: 400;
+		color: #5a5a7a;
+		font-size: clamp(0.9rem, 1.2vw + 0.3rem, 1.25rem);
+		line-height: 1.6;
+		margin: 0;
+		text-align: center;
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.faq-divider {
 		width: 100%;
 		height: auto;
 		display: block;
+		opacity: 0.8;
 	}
 
 	.faq-question {
 		font-family: var(--font-primary);
 		font-weight: 600;
 		color: var(--color-blue);
-		font-size: clamp(0.8rem, 2.4vw, 4rem);
+		font-size: clamp(1rem, 1.5vw + 0.5rem, 2rem);
+		word-break: break-word;
 	}
 
 	.stair-decoration {
-		right: 3%;
+		right: 0;
 		left: auto;
-		top: -10%;
-		width: 49%;
+		top: 10%;
+		width: 45%;
+		z-index: var(--z-base);
 	}
 
 	/* ========== RESPONSIVE ========== */
@@ -548,6 +642,19 @@
 		}
 	}
 
+	@media (max-width: 480px) {
+		.hero-buttons {
+			flex-direction: column;
+			width: 100%;
+			gap: 0.75rem;
+		}
+
+		.cta-button {
+			width: 100%;
+			text-align: center;
+		}
+	}
+
 	@media (max-width: 768px) {
 		.fireworks-left,
 		.fireworks-right {
@@ -560,11 +667,12 @@
 		}
 
 		.hero-content {
-			top: 60%;
+			top: 55%;
+			max-width: 90%;
 		}
 
 		.step {
-			max-width: 60%;
+			max-width: 70%;
 		}
 
 		.step-1,
@@ -585,19 +693,9 @@
 			top: 80%;
 		}
 
-		.event-1,
-		.event-2,
-		.event-3 {
-			position: relative;
-			left: auto;
-			top: auto;
-			width: 80%;
-			margin: 1rem auto;
-		}
-
 		.events-faq-section {
 			aspect-ratio: auto;
-			min-height: 200vh;
+			min-height: 180vh;
 		}
 
 		.faq-content {
@@ -609,12 +707,34 @@
 		.faq-list {
 			width: 100%;
 			border-radius: 32px;
-			padding: 1.6rem;
+			padding: 1.5rem;
+			margin-left: 0;
 		}
 
 		.running-decoration,
 		.stair-decoration {
 			display: none;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.event-1,
+		.event-2,
+		.event-3 {
+			position: relative;
+			left: auto;
+			top: auto;
+			width: 85%;
+			max-width: 400px;
+			margin: 1rem auto;
+		}
+
+		.events-grid {
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 2rem 0;
 		}
 	}
 </style>

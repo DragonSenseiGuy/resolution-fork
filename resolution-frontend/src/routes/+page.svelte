@@ -3,33 +3,71 @@
 </script>
 
 <svelte:head>
-	<title>Resolution - Ship Every Week, Earn Prizes</title>
+	<title>Resolution - Choose Your Challenge, Ship Every Week</title>
 </svelte:head>
 
 <div class="page-container">
 	<InitialPage
-		heroDescription="Ship every week. Earn prizes. Most people quit. Will you be different?"
-		ctaText="I'M INSPIRED"
-		ctaHref="/rsvp"
+		heroDescription="Choose your challenge. Ship every week. Pick workshops at your level, build real projects, earn prizes along the way."
+		ctaText="START BUILDING"
+		ctaHref="/api/auth/login"
 		showSteps={true}
 		showEvents={true}
 		showFaq={true}
 		steps={[
-			{ title: "Step 1", description: "Put something here" },
-			{ title: "Step 2", description: "Put something here" },
-			{ title: "Step 3", description: "Put something here" }
+			{ 
+				title: "Choose", 
+				description: "Pick workshops that match your skill level — beginner to advanced" 
+			},
+			{ 
+				title: "Build", 
+				description: "Work through them at your pace, ship at least one each week" 
+			},
+			{ 
+				title: "Level Up", 
+				description: "Do more, earn more. Complete all 8 weeks for bonus prizes" 
+			}
 		]}
 		events={[
-			{ title: "Event 1", description: "Put something here." },
-			{ title: "Event 2", description: "Put something here.", rotation: 12 },
-			{ title: "Event 3", description: "Put something here.", rotation: -21 }
+			{ 
+				title: "Beginner", 
+				description: "Just getting started? Perfect. These workshops walk you through everything step by step.",
+				starCount: 1
+			},
+			{ 
+				title: "Intermediate", 
+				description: "Know the basics? Level up with projects that push you a bit further.", 
+				rotation: 12,
+				starCount: 2
+			},
+			{ 
+				title: "Advanced", 
+				description: "Ready for a real challenge? These workshops don't hold your hand.", 
+				rotation: -21,
+				starCount: 3
+			},
 		]}
 		faqs={[
-			{ question: "Question 1" },
-			{ question: "Question 2" },
-			{ question: "Question 3" },
-			{ question: "Question 4" },
-			{ question: "Question 5" }
+			{ 
+				question: "What if I'm a total beginner?", 
+				answer: "Perfect! Start with beginner workshops (⭐). They're designed for people with zero experience. You'll learn by building real projects, not watching tutorials." 
+			},
+			{ 
+				question: "How much time does it take each week?", 
+				answer: "Most workshops take 2-5 hours to complete. You can spread that across the week however works for you. Ship at least one project per week to stay on track." 
+			},
+			{ 
+				question: "What counts as 'shipping'?", 
+				answer: "Shipping means finishing something and sharing it. A working demo, a live website, a GitHub repo — something real that exists in the world, not just on your laptop." 
+			},
+			{ 
+				question: "Can I do my own project instead?", 
+				answer: "Yes! You can follow workshops or build your own thing. The only rule is you ship something every week. Mix and match however you want." 
+			},
+			{ 
+				question: "What are the prizes?", 
+				answer: "Complete workshops to earn points. More ships = more prizes. We'll announce specific prizes before the program starts. Think stickers, hardware, and bragging rights." 
+			}
 		]}
 	/>
 </div>
@@ -40,3 +78,4 @@
 		background-color: var(--color-bg-dark);
 	}
 </style>
+

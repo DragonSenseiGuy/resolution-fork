@@ -8,6 +8,7 @@ export interface Event {
 	description: string;
 	rotation?: number;
 	image?: string;
+	starCount?: number;
 }
 
 export interface FAQ {

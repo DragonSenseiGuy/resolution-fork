@@ -1,5 +1,9 @@
 import { lucia } from '$lib/server/auth';
 import type { Handle } from '@sveltejs/kit';
+import { ensureSeasonFromEnv } from '$lib/server/season';
+
+// Sync season from env on startup
+ensureSeasonFromEnv().catch(console.error);
 
 export const handle: Handle = async ({ event, resolve }) => {
   const sessionId = event.cookies.get(lucia.sessionCookieName);

@@ -3,6 +3,7 @@
 	import note1 from '$lib/assets/sticky_note_1.png';
 	import note2 from '$lib/assets/sticky_note_2.png';
 	import note3 from '$lib/assets/sticky_note_3.png';
+	import starImg from '$lib/assets/Asset 1@4x.png';
 
 	interface Props {
 		title: string;
@@ -10,6 +11,7 @@
 		imageSrc?: string;
 		variant?: EventCardVariant;
 		rotation?: number;
+		starCount?: number;
 	}
 
 	let {
@@ -17,7 +19,8 @@
 		description = '',
 		imageSrc = '',
 		variant = 'yellow',
-		rotation = 0
+		rotation = 0,
+		starCount = 0
 	}: Props = $props();
 
 	const noteImages: Record<EventCardVariant, string> = {
@@ -35,6 +38,13 @@
 	<div class="card-inner" style={rotationStyle}>
 		<img src={noteImage} alt="" class="note-bg" />
 		<div class="event-content" class:with-description={!!description}>
+			{#if starCount > 0}
+				<div class="stars-row">
+					{#each Array(starCount) as _}
+						<img src={starImg} alt="★" class="star-icon" />
+					{/each}
+				</div>
+			{/if}
 			<h3 class="event-title">{title}</h3>
 			{#if imageSrc}
 				<div class="event-image">
@@ -87,11 +97,25 @@
 		padding: 5% 5%;
 	}
 
+	.stars-row {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: clamp(0.25rem, 0.5vw, 0.5rem);
+		margin-bottom: 3%;
+	}
+
+	.star-icon {
+		width: clamp(24px, 4vw, 48px);
+		height: auto;
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+	}
+
 	.event-title {
 		font-family: var(--font-primary);
-		font-weight: 400;
+		font-weight: 500;
 		color: var(--color-gold-dark);
-		font-size: clamp(1.2rem, 3.2vw, 2.4rem);
+		font-size: clamp(1.1rem, 0.9rem + 0.6vw, 1.75rem);
 		text-align: center;
 		margin: 0 0 5% 0;
 	}
@@ -113,9 +137,9 @@
 		font-family: var(--font-primary);
 		font-weight: 400;
 		color: var(--color-gold-dark);
-		font-size: clamp(0.64rem, 1.6vw, 1rem);
+		font-size: clamp(0.85rem, 0.75rem + 0.35vw, 1.1rem);
 		text-align: center;
 		margin: 0;
-		line-height: 1.4;
+		line-height: 1.45;
 	}
 </style>
